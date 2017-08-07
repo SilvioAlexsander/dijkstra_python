@@ -73,7 +73,7 @@ def dijkstra_path(grafo, origem, fim): #retorna a menor distancia de um No orige
 
     naoVisitados.remove(atual)
 
-    while naoVisitados:
+    while naoVisitados: #não visitados possui todos os vertices menos o de origem escolhido
         for vizinho, peso in grafo[atual].items():
              pesoCalc = peso + noAtual[atual]
              if distanciaAtual[vizinho] == float("inf") or distanciaAtual[vizinho][0] > pesoCalc:
@@ -81,14 +81,15 @@ def dijkstra_path(grafo, origem, fim): #retorna a menor distancia de um No orige
                  controle[vizinho] = pesoCalc
                  print(controle)
                  
-        if controle == {} : break    
+        if controle == {} :
+          break
         minVizinho = min(controle.items(), key=lambda x: x[1]) #seleciona o menor vizinho
         atual=minVizinho[0]
         noAtual[atual] = minVizinho[1]
         naoVisitados.remove(atual)
         del controle[atual]
 
-    print("A menor distância de %s atá %s é: %s" % (origem, fim, distanciaAtual[fim][0]))
+    print("O menor custo de %s até %s é: %s" % (origem, fim, distanciaAtual[fim][0]))
     print("O menor caminho é: %s" % printPath(distanciaAtual,origem, fim))          
     
 
